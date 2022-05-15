@@ -1,11 +1,11 @@
-name: PM-PluginTemplate
-main: space\yurisi\pluginname
+name: SecureCoinAPI
+main: space\yurisi\SecureCoinAPI\SecureCoinAPI
 author: yurisi
 # depend:
 #   - EconomyAPI
 version: 1.0.0
 api: 4.0.0
 # permissions:
-#   space.yurisi.pluginname.example:
+#   space.yurisi.SecureCoinAPI.example:
 #     default: op
 #     description: 詳細
