@@ -42,4 +42,12 @@ class coinYaml extends Config {
         $this->data[$player->getName()] -= $amount;
         return true;
     }
+
+    public function save(): void {
+        $this->setAll($this->data);
+        try {
+            parent::save();
+        } catch (\JsonException $e) {
+        }
+    }
 }
