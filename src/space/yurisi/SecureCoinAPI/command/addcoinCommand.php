@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace space\yurisi\SecureCoinAPI\command;
 
 use pocketmine\command\CommandSender;
@@ -15,12 +16,12 @@ class addcoinCommand extends VanillaCommand {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if(!isset($args[0]) || !isset($args[1])){
+        if (!isset($args[0]) || !isset($args[1])) {
             $sender->sendMessage($this->getUsage());
             return;
         }
 
-        if(!is_numeric($args[1])){
+        if (!is_numeric($args[1])) {
             $sender->sendMessage($this->getUsage());
             return;
         }
@@ -29,13 +30,13 @@ class addcoinCommand extends VanillaCommand {
 
         $receive_player = $this->main->getServer()->getPlayerByPrefix($args[0]);
 
-        if($receive_player instanceof Player){
+        if ($receive_player instanceof Player) {
             $receive_player = $receive_player->getName();
-        }else{
+        } else {
             $receive_player = $args[0];
         }
 
-        if(!$this->main->isRegister($receive_player)){
+        if (!$this->main->isRegister($receive_player)) {
             $sender->sendMessage("対象が存在しません。");
             return;
         }

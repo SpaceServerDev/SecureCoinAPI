@@ -6,7 +6,7 @@ namespace space\yurisi\SecureCoinAPI;
 use pocketmine\plugin\PluginBase;
 use space\yurisi\SecureCoinAPI\command\addcoinCommand;
 use space\yurisi\SecureCoinAPI\command\mymoneyCommand;
-use space\yurisi\SecureCoinAPI\database\coinYaml;
+use space\yurisi\SecureCoinAPI\database\coinJson;
 use space\yurisi\SecureCoinAPI\database\historySQLite;
 use space\yurisi\SecureCoinAPI\event\player\LoginEvent;
 
@@ -14,12 +14,12 @@ class SecureCoinAPI extends PluginBase {
 
     private static self $main;
 
-    private coinYaml $coinYaml;
+    private coinJson $coinJson;
 
     private historySQLite $history;
 
     protected function onEnable(): void {
-        $this->coinYaml = new coinYaml($this);
+        $this->coinJson = new coinJson($this);
         $this->history = new historySQLite($this);
         $this->getServer()->getPluginManager()->registerEvents(new LoginEvent($this), $this);
         $this->getServer()->getCommandMap()->register('SecureCoinAPI', new addcoinCommand($this));
@@ -28,7 +28,7 @@ class SecureCoinAPI extends PluginBase {
     }
 
     protected function onDisable(): void {
-        $this->coinYaml->save();
+        $this->coinJson->save();
         $this->history->save();
     }
 
@@ -36,30 +36,66 @@ class SecureCoinAPI extends PluginBase {
         return self::$main;
     }
 
+    /**
+     * プレイヤーにお金を付与します
+     *
+     * @param History $history
+     * @return void
+     */
     public function addCoin(History $history) {
-        $this->coinYaml->addCoin($history->getReceivedPlayer(), $history->getAmount());
+        $this->coinJson->addCoin($history->getReceivedPlayer(), $history->getAmount());
         $this->history->registerHistory($history);
     }
 
+    /**
+     * プレイヤーからお金を奪います
+     *
+     * @param History $history
+     * @return void
+     */
     public function takeCoin(History $history) {
-        $this->coinYaml->takeCoin($history->getReceivedPlayer(), $history->getAmount());
+        $this->coinJson->takeCoin($history->getReceivedPlayer(), $history->getAmount());
         $history->setAmount(-$history->getAmount());
         $this->history->registerHistory($history);
     }
 
-    public function setCoin(string $name){
+    /**
+     * プレイヤーのお金をセットします
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setCoin(string $name) {
         //
     }
 
+    /**
+     * プレイヤーのお金を取得します
+     *
+     * @param string $name
+     * @return int|null
+     */
     public function getCoin(string $name): ?int {
-        return $this->coinYaml->getCoin($name);
+        return $this->coinJson->getCoin($name);
     }
 
+    /**
+     * 指定された名前の口座を追加します
+     *
+     * @param string $name
+     * @return void
+     */
     public function register(string $name) {
-        $this->coinYaml->register($name);
+        $this->coinJson->register($name);
     }
 
+    /**
+     * 口座が存在するか確認します
+     *
+     * @param string $name
+     * @return bool
+     */
     public function isRegister(string $name): bool {
-        return $this->coinYaml->isRegister($name);
+        return $this->coinJson->isRegister($name);
     }
 }

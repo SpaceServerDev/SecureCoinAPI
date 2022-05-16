@@ -28,22 +28,22 @@ class historySQLite extends \SQLite3 {
         $this->history[] = $history;
     }
 
-    public function save(){
-        if(count($this->history) <= 0) return;
+    public function save() {
+        if (count($this->history) <= 0) return;
         $value = [];
         foreach ($this->history as $data) {
             /** @var History $data */
-            $received_player   = $data->getReceivedPlayer();
+            $received_player = $data->getReceivedPlayer();
             $sent_player = $data->getSentPlayer() ?? "null";
-            $plugin   = $data->getPlugin();
+            $plugin = $data->getPlugin();
             $class = $data->getClass();
-            $method   = $data->getMethod();
+            $method = $data->getMethod();
             $description = $data->getDescription();
             $amount = $data->getAmount();
             $value[] = "('{$received_player}', '{$sent_player}', '{$plugin}', '{$class}', '{$method}', '{$description}', '{$amount}')";
         }
         $sql = /** @lang SQLite */
-            "INSERT INTO history (received_player, sent_player, plugin, class, description, method, amount) VALUES ".join(",", $value);
+            "INSERT INTO history (received_player, sent_player, plugin, class, description, method, amount) VALUES " . join(",", $value);
         $this->query($sql);
     }
 

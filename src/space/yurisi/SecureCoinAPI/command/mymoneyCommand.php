@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace space\yurisi\SecureCoinAPI\command;
 
 use pocketmine\command\CommandSender;
@@ -14,12 +15,14 @@ class mymoneyCommand extends VanillaCommand {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if(!$sender instanceof Player){
+        if (!$sender instanceof Player) {
             $sender->sendMessage("プレイヤーのみ実行できるコマンドです");
             return;
         }
+
         $player = $sender->getName();
-        if(!$this->main->isRegister($player)){
+
+        if (!$this->main->isRegister($player)) {
             $sender->sendMessage("口座が存在しません。");
             return;
         }

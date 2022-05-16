@@ -12,8 +12,8 @@ class LoginEvent implements Listener {
     public function __construct(private SecureCoinAPI $main) {
     }
 
-    public function onJoin(PlayerLoginEvent $event){
-        if(!$this->main->isRegister($event->getPlayer()->getName())){
+    public function onJoin(PlayerLoginEvent $event) {
+        if (!$this->main->isRegister($event->getPlayer()->getName())) {
             $this->main->register($event->getPlayer()->getName());
         }
     }

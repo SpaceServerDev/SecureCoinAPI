@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace space\yurisi\SecureCoinAPI\database;
 
-use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
-class coinYaml extends Config {
+class coinJson extends Config {
 
     private array $data = [];
 

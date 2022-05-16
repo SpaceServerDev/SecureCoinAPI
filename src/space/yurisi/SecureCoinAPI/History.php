@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace space\yurisi\SecureCoinAPI;
 
-use pocketmine\player\Player;
-
 class History {
 
     public function __construct(
