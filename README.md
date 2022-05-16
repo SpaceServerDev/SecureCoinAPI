@@ -47,5 +47,5 @@ $api->addMoney($history);
 
 お金を取得
 ```php
-$api->getMoney($player);
+$api->getMoney($player->getName());
 ```
