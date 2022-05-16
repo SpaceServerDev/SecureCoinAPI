@@ -14,39 +14,36 @@ class historySQLite extends \SQLite3 {
         parent::__construct($main->getDataFolder() . 'history.db', SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE);
         $sql = /** @lang SQLite */
             "CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                            received_player TEXT,
+                                                            received_player TEXT NOT NULL,
                                                             sent_player TEXT,
                                                             plugin TEXT,
                                                             class TEXT,
                                                             method TEXT,
-                                                            amount INTEGER)";
+                                                            description TEXT,
+                                                            amount INTEGER NOT NULL)";
         $this->query($sql);
     }
 
     public function registerHistory(History $history) {
-        $this->$history[] = [
-            'received_player' => $history->getReceivedPlayer(),
-            'sent_player' => $history->getSentPlayer(),
-            'plugin' => $history->getPlugin(),
-            'class' => $history->getClass(),
-            'method' => $history->getMethod(),
-            'amount' => $history->getAmount()
-        ];
+        $this->$history[] = [$history];
     }
 
     public function save(){
+        if(count($this->history) <= 0) return;
         $value = [];
         foreach ($this->history as $data) {
-            $received_player   = $data['received_player'];
-            $sent_player = $data['sent_player'];
-            $plugin   = $data['plugin'];
-            $class = $data['class'];
-            $method   = $data['method'];
-            $amount = $data['amount'];
-            $value[] = "('{$received_player}', '{$sent_player}', '{$plugin}', '{$class}', '{$method}', '{$amount}')";
+            /** @var History $data */
+            $received_player   = $data->getReceivedPlayerName();
+            $sent_player = $data->getSentPlayerName() ?? "null";
+            $plugin   = $data->getPlugin();
+            $class = $data->getClass();
+            $method   = $data->getMethod();
+            $description = $data->getDescription();
+            $amount = $data->getAmount();
+            $value[] = "('{$received_player}', '{$sent_player}', '{$plugin}', '{$class}', '{$method}', '{$description}', '{$amount}')";
         }
         $sql = /** @lang SQLite */
-            "INSERT INTO history (received_player, sent_player, plugin, class, method, amount) VALUES ".join(",", $value);
+            "INSERT INTO history (received_player, sent_player, plugin, class, description, method, amount) VALUES ".join(",", $value);
         $this->query($sql);
     }
 
