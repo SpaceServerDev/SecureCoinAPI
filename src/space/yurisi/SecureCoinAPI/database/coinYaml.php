@@ -16,30 +16,35 @@ class coinYaml extends Config {
         $this->data = $this->getAll();
     }
 
-    public function register(Player $player) {
-        $this->data[$player->getName()] = 1000;
+    public function register(string $name) {
+        $name = strtolower($name);
+        $this->data[$name] = 1000;
     }
 
-    public function isRegister(Player $player): bool {
-        return isset($this->data[$player->getName()]);
+    public function isRegister(string $name): bool {
+        $name = strtolower($name);
+        return isset($this->data[$name]);
     }
 
-    public function getCoin(Player $player): ?int {
-        if (!isset($this->data[$player->getName()])) {
+    public function getCoin(string $name): ?int {
+        $name = strtolower($name);
+        if (!isset($this->data[$name])) {
             return null;
         }
-        return $this->data[$player->getName()];
+        return $this->data[$name];
     }
 
-    public function addCoin(Player $player, int $amount) {
-        $this->data[$player->getName()] += $amount;
+    public function addCoin(string $name, int $amount) {
+        $name = strtolower($name);
+        $this->data[$name] += $amount;
     }
 
-    public function takeCoin(Player $player, int $amount): bool {
-        if ($this->data[$player->getName()] < $amount) {
+    public function takeCoin(string $name, int $amount): bool {
+        $name = strtolower($name);
+        if ($this->data[$name] < $amount) {
             return false;
         }
-        $this->data[$player->getName()] -= $amount;
+        $this->data[$name] -= $amount;
         return true;
     }
 

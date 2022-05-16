@@ -25,7 +25,7 @@ class historySQLite extends \SQLite3 {
     }
 
     public function registerHistory(History $history) {
-        $this->$history[] = [$history];
+        $this->history[] = $history;
     }
 
     public function save(){
@@ -33,8 +33,8 @@ class historySQLite extends \SQLite3 {
         $value = [];
         foreach ($this->history as $data) {
             /** @var History $data */
-            $received_player   = $data->getReceivedPlayerName();
-            $sent_player = $data->getSentPlayerName() ?? "null";
+            $received_player   = $data->getReceivedPlayer();
+            $sent_player = $data->getSentPlayer() ?? "null";
             $plugin   = $data->getPlugin();
             $class = $data->getClass();
             $method   = $data->getMethod();

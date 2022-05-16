@@ -13,8 +13,8 @@ class LoginEvent implements Listener {
     }
 
     public function onJoin(PlayerLoginEvent $event){
-        if(!$this->main->isRegister($event->getPlayer())){
-            $this->main->register($event->getPlayer());
+        if(!$this->main->isRegister($event->getPlayer()->getName())){
+            $this->main->register($event->getPlayer()->getName());
         }
     }
 }
