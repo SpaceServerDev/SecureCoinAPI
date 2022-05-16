@@ -28,7 +28,7 @@ $api = SecureCoinAPI::getInstance();
 
 お金を追加
 
-https://github.com/SpaceServerDev/SecureCoinAPI/blob/55ac74ce820969bcd1dea0ab73b24ae9501bf332/src/space/yurisi/SecureCoinAPI/command/addcoinCommand.php#L43
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/55ac74ce820969bcd1dea0ab73b24ae9501bf332/src/space/yurisi/SecureCoinAPI/command/addcoinCommand.php#L43-L51
 ```php
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 use space\yurisi\SecureCoinAPI\History
