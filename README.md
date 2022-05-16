@@ -9,32 +9,43 @@
 
 
 ## コマンド
-### example
 
 ```bash
-/example [x] [y] [z]
+プレイヤーのお金を増やす
+/addmoney [playerName] [amount]
+
+自分のお金を確認
+/mymoney
 ```
 
 ## API
 
 インスタンスを取得
 ```php
-$api = Example::getInstance();
+use space\yurisi\SecureCoinAPI\SecureCoinAPI;
+$api = SecureCoinAPI::getInstance();
+```
+
+お金を追加
+
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/55ac74ce820969bcd1dea0ab73b24ae9501bf332/src/space/yurisi/SecureCoinAPI/command/addcoinCommand.php#L43
+```php
+use space\yurisi\SecureCoinAPI\SecureCoinAPI;
+use space\yurisi\SecureCoinAPI\History
+
+$history = new History(
+    $player->getName(),
+    null,
+    "増やすお金",
+    "プラグイン名",
+    "クラス名",
+    "メソッド名",
+    "詳細(省略可)"
+)
+$api->addMoney($history);
 ```
 
 お金を取得
 ```php
 $api->getMoney($player);
 ```
-
-
-## コンフィグ
-```yaml
-1:
-  ID: 1
-  Meta: 1
-```
-
-## その他
-
-
