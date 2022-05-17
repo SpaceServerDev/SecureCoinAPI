@@ -46,8 +46,6 @@ class addcoinCommand extends VanillaCommand {
             null,
             $amount,
             $this->main->getName(),
-            'addcoinCommand',
-            'execute',
             '指定したプレイヤーにお金を追加するコマンド'
         ));
 

@@ -5,15 +5,19 @@ namespace space\yurisi\SecureCoinAPI;
 
 class History {
 
+    private string $class_name;
+    private string $method_name;
+
     public function __construct(
         private string  $received_player,
         private ?string $sent_player,
         private int     $amount,
         private string  $plugin_name,
-        private string  $class_name,
-        private string  $method_name,
         private string  $description = "",
     ) {
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        $this->class_name = $backtrace[1]['class'];
+        $this->method_name = $backtrace[1]['function'];
     }
 
     public function getPlugin(): string {
