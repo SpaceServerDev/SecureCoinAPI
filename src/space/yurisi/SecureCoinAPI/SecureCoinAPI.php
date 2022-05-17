@@ -6,6 +6,8 @@ namespace space\yurisi\SecureCoinAPI;
 use pocketmine\plugin\PluginBase;
 use space\yurisi\SecureCoinAPI\command\addcoinCommand;
 use space\yurisi\SecureCoinAPI\command\mymoneyCommand;
+use space\yurisi\SecureCoinAPI\command\seecoinCommand;
+use space\yurisi\SecureCoinAPI\command\takecoinCommand;
 use space\yurisi\SecureCoinAPI\database\coinJson;
 use space\yurisi\SecureCoinAPI\database\historySQLite;
 use space\yurisi\SecureCoinAPI\event\player\LoginEvent;
@@ -24,6 +26,8 @@ class SecureCoinAPI extends PluginBase {
         $this->getServer()->getPluginManager()->registerEvents(new LoginEvent($this), $this);
         $this->getServer()->getCommandMap()->register('SecureCoinAPI', new addcoinCommand($this));
         $this->getServer()->getCommandMap()->register('SecureCoinAPI', new mymoneyCommand($this));
+        $this->getServer()->getCommandMap()->register('SecureCoinAPI', new seecoinCommand($this));
+        $this->getServer()->getCommandMap()->register('SecureCoinAPI', new takecoinCommand($this));
         self::$main = $this;
     }
 
@@ -54,8 +58,8 @@ class SecureCoinAPI extends PluginBase {
      * @return void
      */
     public function takeCoin(History $history) {
-        $this->coinJson->takeCoin($history->getReceivedPlayer(), $history->getAmount());
-        $history->setAmount(-$history->getAmount());
+        $take = $this->coinJson->takeCoin($history->getReceivedPlayer(), $history->getAmount());
+        $history->setAmount(-$take);
         $this->history->registerHistory($history);
     }
 

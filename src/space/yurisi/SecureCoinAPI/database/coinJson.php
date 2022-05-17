@@ -38,13 +38,15 @@ class coinJson extends Config {
         $this->data[$name] += $amount;
     }
 
-    public function takeCoin(string $name, int $amount): bool {
+    public function takeCoin(string $name, int $amount):int {
         $name = strtolower($name);
         if ($this->data[$name] < $amount) {
-            return false;
+            $amount = $this->data[$name];
+            $this->data[$name] = 0;
+            return $amount;
         }
         $this->data[$name] -= $amount;
-        return true;
+        return $amount;
     }
 
     public function save(): void {

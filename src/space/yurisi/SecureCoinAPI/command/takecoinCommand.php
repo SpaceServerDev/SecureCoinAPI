@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace space\yurisi\SecureCoinAPI\command;
 
@@ -9,10 +8,10 @@ use pocketmine\player\Player;
 use space\yurisi\SecureCoinAPI\History;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
-class addcoinCommand extends VanillaCommand {
+class takecoinCommand extends VanillaCommand {
 
     public function __construct(private SecureCoinAPI $main) {
-        parent::__construct("addcoin", "プレイヤーにお金を渡します", "/addcoin [playerName] [amount]");
+        parent::__construct("takecoin", "プレイヤーからお金を奪います", "/takecoin [playerName] [amount]");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -41,7 +40,7 @@ class addcoinCommand extends VanillaCommand {
             return;
         }
 
-        $this->main->addCoin(new History(
+        $this->main->takeCoin(new History(
             $receive_player,
             null,
             $amount,
@@ -49,6 +48,6 @@ class addcoinCommand extends VanillaCommand {
             $this->getDescription()
         ));
 
-        $sender->sendMessage("§c{$receive_player}に{$amount}円を与えました");
+        $sender->sendMessage("§c{$receive_player}から{$amount}円を奪いました");
     }
 }
