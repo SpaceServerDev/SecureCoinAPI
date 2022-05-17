@@ -8,10 +8,10 @@ use pocketmine\command\defaults\VanillaCommand;
 use pocketmine\player\Player;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
-class mymoneyCommand extends VanillaCommand {
+class mycoinCommand extends VanillaCommand {
 
     public function __construct(private SecureCoinAPI $main) {
-        parent::__construct("mymoney", "所持金を確認します", "/mymoney");
+        parent::__construct("mycoin", "所持金を確認します", "/mycoin");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
