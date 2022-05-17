@@ -28,7 +28,7 @@ $api = SecureCoinAPI::getInstance();
 
 お金を追加
 
-https://github.com/SpaceServerDev/SecureCoinAPI/blob/77ca5fba356d52c6a3513dbd35c1ef93a7999359/src/space/yurisi/SecureCoinAPI/command/addcoinCommand.php#L44-L50
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/master/src/space/yurisi/SecureCoinAPI/command/takecoinCommand.php#L44-L50
 ```php
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 use space\yurisi\SecureCoinAPI\History
@@ -36,11 +36,28 @@ use space\yurisi\SecureCoinAPI\History
 $history = new History(
     $player->getName(),
     null,
-    "増やすお金",
+    増やすお金,
     "プラグイン名",
     "詳細(省略可)"
-)
+);
 $api->addMoney($history);
+```
+
+お金を減らす
+
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/master/src/space/yurisi/SecureCoinAPI/command/takecoinCommand.php#L43-L49
+```php
+use space\yurisi\SecureCoinAPI\SecureCoinAPI;
+use space\yurisi\SecureCoinAPI\History
+
+$history = new History(
+    $player->getName(),
+    null,
+    減らすお金,
+    "プラグイン名",
+    "詳細(省略可)"
+);
+$api->takeMoney($history);
 ```
 
 お金を取得
