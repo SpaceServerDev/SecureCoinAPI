@@ -40,7 +40,7 @@ $history = new History(
     "プラグイン名",
     "詳細(省略可)"
 );
-$api->addMoney($history);
+$api->addCoin($history);
 ```
 
 お金を減らす
@@ -57,10 +57,12 @@ $history = new History(
     "プラグイン名",
     "詳細(省略可)"
 );
-$api->takeMoney($history);
+$api->takeCoin($history);
 ```
 
 お金を取得
+
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/87252872ac9dd25a450102f807d8b0c231ee6324/src/space/yurisi/SecureCoinAPI/command/seecoinCommand.php#L35
 ```php
-$api->getMoney($player->getName());
+$api->getCoin($player->getName());
 ```
