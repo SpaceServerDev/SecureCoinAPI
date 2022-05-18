@@ -12,10 +12,16 @@
 
 ```bash
 プレイヤーのお金を増やす
-/addmoney [playerName] [amount]
+/addcoin [playerName] [amount]
+
+プレイヤーのお金を減らす
+/takecoin [playerName] [amount]
 
 自分のお金を確認
-/mymoney
+/mycoin
+
+他人のお金を確認
+/seecoin [playerName]
 ```
 
 ## API
