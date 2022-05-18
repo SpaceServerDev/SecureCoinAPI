@@ -1,13 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace space\yurisi\SecureCoinAPI\command;
 
 use pocketmine\command\CommandSender;
-use pocketmine\command\defaults\VanillaCommand;
 use pocketmine\player\Player;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
-class seecoinCommand extends VanillaCommand {
+class seecoinCommand extends SecureCoinCommand {
 
     public function __construct(private SecureCoinAPI $main) {
         parent::__construct("seecoin", "プレイヤーのお金を確認します", "/seecoin [playerName]");
@@ -19,13 +18,7 @@ class seecoinCommand extends VanillaCommand {
             return;
         }
 
-        $receive_player = $this->main->getServer()->getPlayerByPrefix($args[0]);
-
-        if ($receive_player instanceof Player) {
-            $receive_player = $receive_player->getName();
-        } else {
-            $receive_player = $args[0];
-        }
+        $receive_player = $this->getPlayer($args[0]);
 
         if (!$this->main->isRegister($receive_player)) {
             $sender->sendMessage("対象が存在しません。");
