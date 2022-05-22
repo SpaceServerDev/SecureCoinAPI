@@ -71,8 +71,7 @@ $api->takeCoin($history);
 
 お金を取得
 
-https://github.com/SpaceServerDev/SecureCoinAPI/blob/32b109c19cb7ba73f3086bfb33d5ad1bc84d30e9/src/space/yurisi/SecureCoinAPI/command/takecoinCommand.php#L28-L34
-
+https://github.com/SpaceServerDev/SecureCoinAPI/blob/2942232df7b512bd238b18b33411b98a1ac9322c/src/space/yurisi/SecureCoinAPI/command/seecoinCommand.php#L28
 ```php
 $api->getCoin($player->getName());
 ```
