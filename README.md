@@ -22,6 +22,9 @@
 
 他人のお金を確認
 /seecoin [playerName]
+
+お金をセットする
+/setcoin [playerName]
 ```
 
 ## API
@@ -72,3 +75,5 @@ https://github.com/SpaceServerDev/SecureCoinAPI/blob/87252872ac9dd25a450102f807d
 ```php
 $api->getCoin($player->getName());
 ```
+
+お金をセット

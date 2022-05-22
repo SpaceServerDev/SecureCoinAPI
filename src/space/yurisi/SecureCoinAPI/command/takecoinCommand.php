@@ -14,17 +14,9 @@ class takecoinCommand extends SecureCoinCommand {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if (!isset($args[0]) || !isset($args[1])) {
-            $sender->sendMessage($this->getUsage());
-            return;
-        }
+        $amount = $this->getAmount($args, $sender);
 
-        if (!is_numeric($args[1])) {
-            $sender->sendMessage($this->getUsage());
-            return;
-        }
-
-        $amount = (int)floor((int)$args[1]);
+        if($amount == null) return;
 
         $receive_player = $this->getPlayer($args[0]);
 
