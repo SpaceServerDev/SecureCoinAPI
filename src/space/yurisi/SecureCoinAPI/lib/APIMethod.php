@@ -5,7 +5,7 @@ namespace space\yurisi\SecureCoinAPI\lib;
 
 use space\yurisi\SecureCoinAPI\History;
 
-trait APIMethod{
+trait APIMethod {
 
     /**
      * プレイヤーにお金を付与します
@@ -37,7 +37,9 @@ trait APIMethod{
      * @return void
      */
     public function setCoin(History $history) {
-        //
+        $history = $this->coinJson->setCoin($history);
+        if($history == null) return;
+        $this->history->registerHistory($history);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace space\yurisi\SecureCoinAPI\database;
 
 use pocketmine\utils\Config;
+use space\yurisi\SecureCoinAPI\History;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
 class coinJson extends Config {
@@ -36,6 +37,17 @@ class coinJson extends Config {
     public function addCoin(string $name, int $amount) {
         $name = strtolower($name);
         $this->data[$name] += $amount;
+    }
+
+    public function setCoin(History $history): ?History{
+        $name = $history->getReceivedPlayer();
+        $amount = $history->getAmount();
+        if(!$this->isRegister($name)) return null;
+        $coin = $this->getCoin($name);
+        $coin = $amount - $coin;
+        $this->data[$name] = $amount;
+        $history->setAmount($coin);
+        return $history;
     }
 
     public function takeCoin(string $name, int $amount):int {
