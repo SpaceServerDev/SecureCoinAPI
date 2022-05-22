@@ -33,10 +33,10 @@ trait APIMethod{
     /**
      * プレイヤーのお金をセットします
      *
-     * @param string $name
+     * @param History $history
      * @return void
      */
-    public function setCoin(string $name) {
+    public function setCoin(History $history) {
         //
     }
 

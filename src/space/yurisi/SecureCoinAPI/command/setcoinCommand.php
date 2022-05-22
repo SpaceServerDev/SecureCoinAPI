@@ -8,6 +8,10 @@ use pocketmine\command\CommandSender;
 
 class setcoinCommand extends SecureCoinCommand {
 
+    public function __construct() {
+        parent::__construct("/setcoin", 'プレイヤーのお金を変更します。', '/setcoin [playerName] [amount]');
+    }
+
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
         // TODO: Implement execute() method.
     }
