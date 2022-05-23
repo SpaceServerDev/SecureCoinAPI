@@ -11,6 +11,7 @@ use space\yurisi\SecureCoinAPI\command\mycoinCommand;
 use space\yurisi\SecureCoinAPI\command\seecoinCommand;
 use space\yurisi\SecureCoinAPI\command\setcoinCommand;
 use space\yurisi\SecureCoinAPI\command\takecoinCommand;
+use space\yurisi\SecureCoinAPI\command\givecoinCommand;
 use space\yurisi\SecureCoinAPI\database\coinJson;
 use space\yurisi\SecureCoinAPI\database\historySQLite;
 use space\yurisi\SecureCoinAPI\lib\APIMethod;
@@ -31,6 +32,7 @@ class SecureCoinAPI extends PluginBase {
         $this->registerEvents();
         $this->registerCommands();
         self::$main = $this;
+        $this->register('testuser');
     }
 
     private function registerEvents() {
@@ -49,13 +51,13 @@ class SecureCoinAPI extends PluginBase {
             new mycoinCommand($this),
             new seecoinCommand($this),
             new takecoinCommand($this),
-            new setcoinCommand($this)
+            new setcoinCommand($this),
+            new givecoinCommand($this)
         ]);
     }
 
     protected function onDisable(): void {
-        $this->coinJson->save();
-        $this->history->save();
+        $this->save();
     }
 
     public static function getInstance(): self {

@@ -12,9 +12,11 @@ class mycoinCommand extends SecureCoinCommand {
 
     public function __construct(private SecureCoinAPI $main) {
         parent::__construct("mycoin", "所持金を確認します", "/mycoin");
+        $this->setPermission("space.yurisi.SecureCoinAPI.mycoin");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$this->testPermission($sender)) return;
         if (!$sender instanceof Player) {
             $sender->sendMessage("プレイヤーのみ実行できるコマンドです");
             return;

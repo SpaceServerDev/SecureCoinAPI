@@ -28,6 +28,10 @@ class historySQLite extends \SQLite3 {
         $this->history[] = $history;
     }
 
+    public function getHistoryCount(): int {
+        return count($this->history);
+    }
+
     public function save() {
         if (count($this->history) <= 0) return;
         $value = [];

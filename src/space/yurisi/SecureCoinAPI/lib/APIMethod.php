@@ -71,4 +71,16 @@ trait APIMethod {
     public function isRegister(string $name): bool {
         return $this->coinJson->isRegister($name);
     }
+
+    /**
+     * 現在の経済状況を保存します
+     *
+     * @return void
+     */
+    public function save(){
+        $this->coinJson->save();
+        if($this->history->getHistoryCount() > 0){
+            $this->history->save();
+        }
+    }
 }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace space\yurisi\SecureCoinAPI\command;
 
 use pocketmine\command\CommandSender;
-use pocketmine\command\defaults\VanillaCommand;
-use pocketmine\player\Player;
 use space\yurisi\SecureCoinAPI\History;
 use space\yurisi\SecureCoinAPI\SecureCoinAPI;
 
@@ -13,9 +11,12 @@ class addcoinCommand extends SecureCoinCommand {
 
     public function __construct(private SecureCoinAPI $main) {
         parent::__construct("addcoin", "プレイヤーにお金を渡します", "/addcoin [playerName] [amount]");
+        $this->setPermission("space.yurisi.SecureCoinAPI.addcoin");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$this->testPermission($sender)) return;
+
         $amount = $this->getAmount($args, $sender);
 
         if($amount == null) return;

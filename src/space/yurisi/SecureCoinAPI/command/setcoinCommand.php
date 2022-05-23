@@ -12,9 +12,12 @@ class setcoinCommand extends SecureCoinCommand {
 
     public function __construct(private SecureCoinAPI $main) {
         parent::__construct("setcoin", 'プレイヤーのお金を変更します。', '/setcoin [playerName] [amount]');
+        $this->setPermission("space.yurisi.SecureCoinAPI.setcoin");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$this->testPermission($sender)) return;
+
         $amount = $this->getAmount($args, $sender);
 
         if($amount == null) return;

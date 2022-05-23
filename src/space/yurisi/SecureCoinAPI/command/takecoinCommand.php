@@ -11,9 +11,12 @@ class takecoinCommand extends SecureCoinCommand {
 
     public function __construct(private SecureCoinAPI $main) {
         parent::__construct("takecoin", "プレイヤーからお金を奪います", "/takecoin [playerName] [amount]");
+        $this->setPermission("space.yurisi.SecureCoinAPI.takecoin");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
+        if (!$this->testPermission($sender)) return;
+
         $amount = $this->getAmount($args, $sender);
 
         if($amount == null) return;

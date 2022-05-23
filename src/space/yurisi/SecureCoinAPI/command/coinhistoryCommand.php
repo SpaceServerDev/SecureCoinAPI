@@ -8,10 +8,12 @@ use pocketmine\command\CommandSender;
 class coinhistoryCommand extends SecureCoinCommand {
 
     public function __construct() {
-        parent::__construct("coinhistory", "履歴を表示する", "/coinhistory [pluginName]");
+        parent::__construct("coinhistory", "履歴を表示する", "/coinhistory [pluginName] [page = 1]");
+        $this->setPermission("space.yurisi.SecureCoinAPI.coinhistory");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        // TODO: Implement execute() method.
+        if (!$this->testPermission($sender)) return;
+        //TODO
     }
 }
