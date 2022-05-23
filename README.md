@@ -28,6 +28,9 @@
 
 お金を渡す
 /givecoin [playerName] [amount]
+
+履歴を確認する
+/coinhistory [playerName] [page = 1]
 ```
 
 ## API
