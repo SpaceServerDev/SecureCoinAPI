@@ -7,6 +7,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\plugin\PluginBase;
 use space\yurisi\SecureCoinAPI\command\addcoinCommand;
+use space\yurisi\SecureCoinAPI\command\coinhistoryCommand;
 use space\yurisi\SecureCoinAPI\command\mycoinCommand;
 use space\yurisi\SecureCoinAPI\command\seecoinCommand;
 use space\yurisi\SecureCoinAPI\command\setcoinCommand;
@@ -52,7 +53,8 @@ class SecureCoinAPI extends PluginBase {
             new seecoinCommand($this),
             new takecoinCommand($this),
             new setcoinCommand($this),
-            new givecoinCommand($this)
+            new givecoinCommand($this),
+            new coinhistoryCommand($this)
         ]);
     }
 

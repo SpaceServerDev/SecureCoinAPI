@@ -32,6 +32,20 @@ class historySQLite extends \SQLite3 {
         return count($this->history);
     }
 
+    public function getHistory(string $name, int $page = 1): ?array {
+        $offset = 10 * ($page-1);
+        $limit = 10 * $page;
+        $history = [];
+        $result = $this->query("SELECT * FROM history WHERE received_player = \"$name\" ORDER BY id DESC LIMIT $offset, $limit");
+        while($data = $result->fetchArray()){
+            $history[] = $data['id']." | ".$data['sent_player']." | ".$data['amount']." | ".$data['plugin']." | ".$data['class']." | ".$data['method']." | ".$data['description'];
+        }
+        if (count($history) <= 0) {
+            return null;
+        }
+        return $history;
+    }
+
     public function save() {
         if (count($this->history) <= 0) return;
         $value = [];
@@ -47,7 +61,7 @@ class historySQLite extends \SQLite3 {
             $value[] = "('{$received_player}', '{$sent_player}', '{$plugin}', '{$class}', '{$method}', '{$description}', '{$amount}')";
         }
         $sql = /** @lang SQLite */
-            "INSERT INTO history (received_player, sent_player, plugin, class, description, method, amount) VALUES " . join(",", $value);
+            "INSERT INTO history (received_player, sent_player, plugin, class, method, description, amount) VALUES " . join(",", $value);
         $this->query($sql);
     }
 

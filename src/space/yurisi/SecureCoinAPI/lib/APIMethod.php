@@ -83,4 +83,15 @@ trait APIMethod {
             $this->history->save();
         }
     }
+
+    /**
+     * 履歴を取得
+     *
+     * @param string $name
+     * @param int $page
+     * @return bool|array|null
+     */
+    public function getHistory(string $name, int $page = 1): bool|array|null {
+        return $this->history->getHistory($name, $page);
+    }
 }
