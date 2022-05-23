@@ -33,7 +33,6 @@ class SecureCoinAPI extends PluginBase {
         $this->registerEvents();
         $this->registerCommands();
         self::$main = $this;
-        $this->register('testuser');
     }
 
     private function registerEvents() {
