@@ -17,6 +17,11 @@ class coinhistoryCommand extends SecureCoinCommand {
         if (!$this->testPermission($sender)) return;
         $this->main->save();
 
+        if(!isset($args[0])){
+            $sender->sendMessage($this->getUsage());
+            return;
+        }
+
         $player = $this->getPlayer($args[0]);
 
         if(!isset($args[1])) $args[1] = 1;

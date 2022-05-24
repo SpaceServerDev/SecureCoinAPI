@@ -45,7 +45,7 @@ class givecoinCommand extends SecureCoinCommand{
             return;
         }
 
-        if($this->main->isEnoughCoin($sent_player, $amount)){
+        if(!$this->main->isEnoughCoin($sent_player, $amount)){
             $sender->sendMessage("お金が足りません。");
             return;
         }

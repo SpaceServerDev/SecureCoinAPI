@@ -104,6 +104,6 @@ trait APIMethod {
      */
     public function isEnoughCoin(string $name, int $value): bool {
         if(!$this->isRegister($name)) return false;
-        return $this->getCoin($name) < $value;
+        return $this->getCoin($name) >= $value;
     }
 }
