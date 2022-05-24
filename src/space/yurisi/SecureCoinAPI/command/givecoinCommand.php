@@ -20,10 +20,18 @@ class givecoinCommand extends SecureCoinCommand{
 
         $amount = $this->getAmount($args, $sender);
 
+        if($amount === null) return;
+
+        if ($amount === 0){
+            $sender->sendMessage('0は指定できません。');
+            return;
+        }
+
         if (!$sender instanceof Player){
             $sender->sendMessage('ゲーム内で実行してください。');
             return;
         }
+
         $receive_player = $this->getPlayer($args[0]);
         $sent_player = $sender->getName();
 
@@ -37,7 +45,7 @@ class givecoinCommand extends SecureCoinCommand{
             return;
         }
 
-        if($this->main->getCoin($sent_player) < $amount){
+        if($this->main->isEnoughCoin($sent_player, $amount)){
             $sender->sendMessage("お金が足りません。");
             return;
         }

@@ -11,10 +11,10 @@
 ## コマンド
 
 ```bash
-プレイヤーのお金を増やす
+プレイヤーのお金を増やす(op)
 /addcoin [playerName] [amount]
 
-プレイヤーのお金を減らす
+プレイヤーのお金を減らす(op)
 /takecoin [playerName] [amount]
 
 自分のお金を確認
@@ -23,13 +23,13 @@
 他人のお金を確認
 /seecoin [playerName]
 
-お金をセットする
+お金をセットする(op)
 /setcoin [playerName]
 
 お金を渡す
 /givecoin [playerName] [amount]
 
-履歴を確認する
+履歴を確認する(op)
 /coinhistory [playerName] [page = 1]
 ```
 
@@ -118,4 +118,9 @@ $api->takeCoin(new History(
     "プラグイン名",
     "詳細(省略可)"
 ));
+```
+
+お金が足りるか確認
+```php
+$api->isEnoughCoin(プレイヤー名, お金);
 ```

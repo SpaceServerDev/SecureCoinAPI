@@ -38,7 +38,7 @@ trait APIMethod {
      */
     public function setCoin(History $history) {
         $history = $this->coinJson->setCoin($history);
-        if($history == null) return;
+        if ($history == null) return;
         $this->history->registerHistory($history);
     }
 
@@ -77,9 +77,9 @@ trait APIMethod {
      *
      * @return void
      */
-    public function save(){
+    public function save() {
         $this->coinJson->save();
-        if($this->history->getHistoryCount() > 0){
+        if ($this->history->getHistoryCount() > 0) {
             $this->history->save();
         }
     }
@@ -93,5 +93,17 @@ trait APIMethod {
      */
     public function getHistory(string $name, int $page = 1): bool|array|null {
         return $this->history->getHistory($name, $page);
+    }
+
+    /**
+     * お金が足りるかを取得
+     *
+     * @param string $name
+     * @param int $value
+     * @return bool
+     */
+    public function isEnoughCoin(string $name, int $value): bool {
+        if(!$this->isRegister($name)) return false;
+        return $this->getCoin($name) < $value;
     }
 }
